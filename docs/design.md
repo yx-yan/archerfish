@@ -58,6 +58,21 @@ worker thread loads the model and handles every job, because MLX work stays on t
 thread that loaded it. The worker never touches AppKit UI: the menu bar polls its
 state ten times a second. A press while a job is running is ignored.
 
+## Overlay
+
+A pill at the bottom of the screen shows the waveform while recording, then folds
+into a blinking cursor while working. It is a nonactivating panel that ignores the
+mouse, because taking focus would send the paste to the wrong place. It waits
+0.15 s before appearing so Option shortcuts do not flash it, and its 30 fps timer
+only runs while it is on screen.
+
+## Setup window
+
+The app opens it at launch while anything is missing. macOS sends no event when a
+permission changes, so it polls once a second while it is open. Documents has no
+row: without that access the app cannot start from a checkout in Documents. A
+missing DeepSeek key is not fatal, because the rewrite falls back to the transcript.
+
 ## Paste
 
 The text goes through the clipboard and a simulated Cmd+V, then the old clipboard

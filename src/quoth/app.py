@@ -3,6 +3,7 @@
 import os
 import signal
 import threading
+from pathlib import Path
 
 import rumps
 from AppKit import NSApplication, NSApplicationActivationPolicyAccessory
@@ -13,32 +14,46 @@ from Quartz import CGRequestListenEventAccess
 from quoth.asr import QwenTranscriber
 from quoth.dictation import Dictation, State
 from quoth.hotkey import HoldKey
+from quoth.onboarding import SetupWindow, incomplete
+from quoth.overlay import Overlay
 from quoth.paste import paste
 from quoth.recorder import Microphone
 from quoth.rewrite import Rewriter
 
-ICONS = {
-    State.LOADING: "⏳",
-    State.READY: "🎙️",
-    State.RECORDING: "🔴",
-    State.WORKING: "💭",
-}
+ICON_DIR = Path(__file__).parent / "icons"
+ICONS = {state: str(ICON_DIR / f"{state.name.lower()}.png") for state in State}
+WARNING_ICON = str(ICON_DIR / "warning.png")
 
 
 class MenuBar(rumps.App):
     def __init__(self, dictation: Dictation, hold_key: HoldKey):
-        super().__init__("quoth", title=ICONS[State.LOADING], quit_button=None)
+        super().__init__("quoth", icon=ICONS[State.LOADING], template=True, quit_button=None)
         self.dictation = dictation
         self.hold_key = hold_key
+        self.overlay = Overlay(dictation)
+        self.setup = SetupWindow()
+        self.greeted = False
         self.status = rumps.MenuItem(State.LOADING.value)
-        self.menu = [self.status, rumps.MenuItem("Quit", callback=lambda _: quit_now())]
+        self.menu = [
+            self.status,
+            rumps.separator,
+            rumps.MenuItem("Setup...", callback=lambda _: self.setup.show()),
+            rumps.MenuItem("Quit Quoth", callback=lambda _: quit_now()),
+        ]
 
     @rumps.timer(0.1)
     def refresh(self, _):
         """Update the UI here because AppKit must only be touched on the main thread."""
         state, message = self.dictation.state, self.dictation.message
-        self.title = "⚠️" if state is State.READY and message else ICONS[state]
+        icon = WARNING_ICON if state is State.READY and message else ICONS[state]
+        if icon != self.icon:
+            self.icon = icon
         self.status.title = message or state.value
+        self.overlay.update()
+        if not self.greeted:
+            self.greeted = True
+            if incomplete():
+                self.setup.show()
 
     @rumps.timer(2)
     def listen(self, _):
@@ -49,7 +64,7 @@ class MenuBar(rumps.App):
             self.hold_key.start()
             self.dictation.message = ""
         except PermissionError:
-            self.dictation.message = "Allow Input Monitoring, then reopen the app"
+            self.dictation.message = "Allow Input Monitoring in Setup, then reopen Quoth"
 
 
 def quit_now(*_) -> None:

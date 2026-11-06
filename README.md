@@ -2,7 +2,7 @@
   <img src="assets/logo.svg" width="128" alt="Quoth logo: a voice waveform that ends in a text cursor">
 </p>
 
-<h1 align="center">Quoth · 直言</h1>
+<h1 align="center">Quoth</h1>
 
 <p align="center">
   <strong>Say it messy. Send it clean.</strong><br>
@@ -15,9 +15,15 @@
   <img src="https://img.shields.io/badge/status-early-FFB020" alt="Status: early">
 </p>
 
+<p align="center">
+  <img src="assets/banner.svg" alt="You say: can you rename this to user id, no wait, account id, and uh update the callers too. Your cursor gets: Rename this to account id and update the callers too.">
+</p>
+
+Chinese and English both work, and long requests keep their constraints:
+
 | You say | Your cursor gets |
 |---|---|
-| can you rename this to user id, no wait, account id, and uh update the callers too | Rename this to account id and update the callers too. |
+| okay so three things, first fix the login page, second add the missing test, and then third update the readme I guess | Fix the login page, add the missing test, and update the readme. |
 | 呃我现在这个项目啊它那个接口特别慢，就是用户一打开页面要等好几秒，我感觉可能是数据库的问题，也可能不是，你先帮我看一下，先别改代码，就是看完告诉我原因，然后我们再决定怎么改，对，先别改 | 我现在这个项目接口特别慢，用户一打开页面要等好几秒。我感觉可能是数据库的问题，也可能不是。你先帮我看一下，先别改代码，看完告诉我原因，然后我们再决定怎么改。对，先别改。 |
 
 <sub>Real output from the rewrite step, using inputs from <a href="evals/rewrite_cases.tsv">the test cases</a>.</sub>
@@ -35,7 +41,7 @@ flowchart LR
     D --> E["You check it<br>and press Enter"]
 ```
 
-- **Your meaning stays intact.** Fillers and false starts go, and self-corrections keep only the final version. Every request and constraint stays, and nothing is added.
+- **Your meaning stays intact.** Fillers and false starts go, and self-corrections keep only the final version. The rewrite is told to keep every request and constraint, and to add nothing.
 - **Audio stays on your Mac.** Speech recognition runs locally. Only the transcript goes to DeepSeek.
 - **Nothing sends itself.** A misheard word should not become an instruction, so you press Enter.
 - **You keep what you said.** If the rewrite fails or takes over 5 seconds, you get the raw transcript.
@@ -62,9 +68,11 @@ macos/build.sh
 open /Applications/Quoth.app
 ```
 
-This builds a small native launcher and installs `Quoth.app`, which you can then open from Spotlight. To start it at login, add it under System Settings > General > Login Items. Allow Documents, Microphone, Accessibility and Input Monitoring for Quoth, then reopen it.
+This builds a small native launcher and installs `Quoth.app`, which you can then open from Spotlight. To start it at login, add it under System Settings > General > Login Items. If the checkout is in Documents, allow that access when asked. A setup window then shows what is left to turn on, and you can reopen it from the menu bar.
 
-When the menu bar icon shows 🎙️, click into any text box, hold the right Option key, speak, and let go. Press Enter yourself to send. Errors go to `~/Library/Logs/Quoth.log`.
+The first launch downloads the speech model, so the menu bar waveform stays dim until that finishes.
+
+When the menu bar waveform turns solid, click into any text box, hold the right Option key, speak, and let go. A small pill at the bottom of the screen shows that it is listening. Press Enter yourself to send. Errors go to `~/Library/Logs/Quoth.log`.
 
 ## Good to know
 
