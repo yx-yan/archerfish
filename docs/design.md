@@ -25,6 +25,17 @@ Part of these rates comes from digits, such as "500" for "five hundred", which
 are not real mistakes. Qwen also punctuates Chinese, while Whisper mostly does
 not. Whisper's English was slightly better, but the gap is small for 10 clips.
 
+The app runs an 8-bit build of that model. On the same 20 clips it gave the same
+text as the 16-bit original, cut peak GPU memory while loading from 2.92 GB to 0.98 GB
+and median latency by about a quarter. A 4-bit build saved only 0.05 GB more, and
+English WER rose to 8.7% with errors that changed the meaning.
+
+| Build | Chinese CER | English WER | Median latency | Footprint after 20 clips |
+|---|---|---|---|---|
+| 16-bit | 1.6% | 5.0% | 0.32-0.35 s | 1.72 GB |
+| 8-bit | 1.6% | 5.0% | 0.24-0.27 s | 1.34 GB |
+| 4-bit | 1.8% | 8.7% | 0.18-0.22 s | 1.29 GB |
+
 If latency becomes a problem, Qwen3-ASR's streaming mode can decode while the
 user is still talking. Its `context` argument is the likely way to bias
 recognition toward a personal glossary.
@@ -51,6 +62,14 @@ state ten times a second. A press while a job is running is ignored.
 The text goes through the clipboard and a simulated Cmd+V, then the old clipboard
 comes back, unless the user copied something new in the meantime. Without
 Accessibility access the text simply stays on the clipboard.
+
+## App bundle
+
+macOS grants Microphone and Accessibility to the binary that makes the call, so a
+script that execs or spawns Python would ask as Python. `macos/launcher.c` embeds
+Python and runs `voxprompt.app` in its own process instead, and it uses the checkout's
+`.venv`. The bundle is ad-hoc signed, so permissions follow its hash: Python changes
+keep them, but changes to the launcher, `Info.plist` or icon may not.
 
 ## Rewrite
 

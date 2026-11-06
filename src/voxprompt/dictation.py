@@ -69,7 +69,7 @@ class Dictation:
             self.message = self.process(samples)
         except Exception as error:
             print(f"Dictation failed: {error!r}", file=sys.stderr)
-            self.message = "Something went wrong; see the terminal"
+            self.message = "Something went wrong; see the log"
         self.state = State.READY
 
     def process(self, samples: np.ndarray) -> str:

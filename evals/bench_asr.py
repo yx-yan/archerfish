@@ -5,7 +5,10 @@ Run one backend per process so peak memory is not shared between models.
 
 import argparse
 import json
+import os
+import re
 import statistics
+import subprocess
 import time
 import wave
 from pathlib import Path
@@ -23,9 +26,18 @@ def duration(path: Path) -> float:
         return f.getnframes() / f.getframerate()
 
 
+def footprint_gb() -> float:
+    """What macOS charges this process, including GPU memory."""
+    report = subprocess.run(
+        ["footprint", "-p", str(os.getpid())], capture_output=True, text=True
+    ).stdout
+    return int(re.search(r"phys_footprint: (\d+) MB", report)[1]) / 1024
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--backend", choices=BACKENDS, required=True)
+    parser.add_argument("--model", help="Model id; results get their own file")
     parser.add_argument("--samples", type=Path, default=EVALS / "samples")
     args = parser.parse_args()
 
@@ -36,8 +48,10 @@ def main() -> None:
     if not paths:
         raise SystemExit(f"No samples in {args.samples}. Run record_samples.py first.")
 
-    transcriber = BACKENDS[args.backend]()
+    transcriber = BACKENDS[args.backend](args.model) if args.model else BACKENDS[args.backend]()
     transcriber.transcribe(paths[0])  # Warm up: the app keeps its model loaded.
+    load_peak = mx.get_peak_memory()
+    mx.reset_peak_memory()
 
     rows = []
     for path in paths:
@@ -56,7 +70,12 @@ def main() -> None:
         print(f"{path.stem}  {rows[-1]['audio_seconds']:5.1f}s audio  "
               f"{seconds:5.2f}s  err {rows[-1]['error_rate']:.1%}  {transcript.text}")
 
-    print(f"\n{args.backend}: peak GPU memory {mx.get_peak_memory() / 2**30:.2f} GB")
+    print(f"\n{args.model or args.backend}: peak GPU memory {load_peak / 2**30:.2f} GB loading, "
+          f"{mx.get_peak_memory() / 2**30:.2f} GB transcribing")
+    print(f"active {mx.get_active_memory() / 2**30:.2f} GB, "
+          f"cache {mx.get_cache_memory() / 2**30:.2f} GB, footprint {footprint_gb():.2f} GB")
+    mx.clear_cache()
+    print(f"after clearing the cache: footprint {footprint_gb():.2f} GB")
     for language in ("zh", "en"):
         group = [r for r in rows if r["id"].startswith(language)]
         if group:
@@ -65,7 +84,8 @@ def main() -> None:
 
     results = EVALS / "results"
     results.mkdir(exist_ok=True)
-    (results / f"{args.backend}.json").write_text(json.dumps(rows, ensure_ascii=False, indent=2))
+    name = args.model.split("/")[-1] if args.model else args.backend
+    (results / f"{name}.json").write_text(json.dumps(rows, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

@@ -2,7 +2,6 @@
 
 import os
 import signal
-import sys
 import threading
 
 import rumps
@@ -27,9 +26,10 @@ ICONS = {
 
 
 class MenuBar(rumps.App):
-    def __init__(self, dictation: Dictation):
+    def __init__(self, dictation: Dictation, hold_key: HoldKey):
         super().__init__("voxprompt", title=ICONS[State.LOADING], quit_button=None)
         self.dictation = dictation
+        self.hold_key = hold_key
         self.status = rumps.MenuItem(State.LOADING.value)
         self.menu = [self.status, rumps.MenuItem("Quit", callback=lambda _: quit_now())]
 
@@ -39,6 +39,17 @@ class MenuBar(rumps.App):
         state, message = self.dictation.state, self.dictation.message
         self.title = "⚠️" if state is State.READY and message else ICONS[state]
         self.status.title = message or state.value
+
+    @rumps.timer(2)
+    def listen(self, _):
+        """Keep trying, so the app can show what is missing instead of exiting."""
+        if self.hold_key.tap is not None:
+            return
+        try:
+            self.hold_key.start()
+            self.dictation.message = ""
+        except PermissionError:
+            self.dictation.message = "Allow Input Monitoring, then reopen the app"
 
 
 def quit_now(*_) -> None:
@@ -52,16 +63,11 @@ def main() -> None:
 
     dictation = Dictation(Microphone(), QwenTranscriber, Rewriter(), paste)
     hold_key = HoldKey(dictation.press, dictation.release)
-    try:
-        hold_key.start()
-    except PermissionError:
-        sys.exit("Turn on this terminal app under System Settings > Privacy & Security > "
-                 "Input Monitoring and Accessibility, then restart it.")
 
     signal.signal(signal.SIGINT, quit_now)
     threading.Thread(target=dictation.run, daemon=True).start()
     NSApplication.sharedApplication().setActivationPolicy_(NSApplicationActivationPolicyAccessory)
-    MenuBar(dictation).run()
+    MenuBar(dictation, hold_key).run()
 
 
 if __name__ == "__main__":
