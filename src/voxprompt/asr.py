@@ -28,7 +28,7 @@ class Transcriber(Protocol):
 
 
 class QwenTranscriber:
-    def __init__(self, model: str = "Qwen/Qwen3-ASR-0.6B"):
+    def __init__(self, model: str = "moona3k/mlx-qwen3-asr-0.6b-8bit"):
         from mlx_qwen3_asr import Session
 
         self.session = Session(model=model)

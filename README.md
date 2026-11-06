@@ -18,16 +18,28 @@ cp .env.example .env   # then add your DeepSeek key
 ## Run the app
 
 ```bash
-.venv/bin/voxprompt-app
+macos/build.sh
+open /Applications/VoxPrompt.app
 ```
 
-Run it from Terminal.app and leave that window open. Allow Microphone, Accessibility
-and Input Monitoring for Terminal. When the menu bar icon shows 🎙️, click into any
-text box, hold the right Option key, speak, and let go. Press Enter yourself to send.
+This builds a small native launcher (needs the Xcode Command Line Tools) and installs
+`VoxPrompt.app`, which you can then open from Spotlight. To start it at login, add it
+under System Settings > General > Login Items. Allow Documents, Microphone,
+Accessibility and Input Monitoring for VoxPrompt, then reopen it.
+
+When the menu bar icon shows 🎙️, click into any text box, hold the right Option key,
+speak, and let go. Press Enter yourself to send. Errors go to
+`~/Library/Logs/VoxPrompt.log`.
+
+The app runs Python from this checkout, so code changes only need a restart. Moving the
+checkout or changing anything in `macos/` may mean granting the permissions again.
 
 The microphone stays open while the app runs, so macOS shows its recording
 indicator the whole time. Audio is only kept while the key is held. Restart the app
 after changing the input device.
+
+To run without the app, use `.venv/bin/voxprompt-app` from Terminal.app and grant the
+same permissions to Terminal.
 
 ## Clean up a recording
 
