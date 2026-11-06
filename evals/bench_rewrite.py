@@ -7,7 +7,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from voxprompt.rewrite import Rewriter
+from quoth.rewrite import Rewriter
 
 EVALS = Path(__file__).parent
 

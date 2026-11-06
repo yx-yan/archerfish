@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from voxprompt.asr import Transcript
-from voxprompt.cli import process
-from voxprompt.rewrite import Rewrite
+from quoth.asr import Transcript
+from quoth.cli import process
+from quoth.rewrite import Rewrite
 
 
 class FakeTranscriber:

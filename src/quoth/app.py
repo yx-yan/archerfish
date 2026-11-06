@@ -10,12 +10,12 @@ from ApplicationServices import AXIsProcessTrustedWithOptions
 from dotenv import load_dotenv
 from Quartz import CGRequestListenEventAccess
 
-from voxprompt.asr import QwenTranscriber
-from voxprompt.dictation import Dictation, State
-from voxprompt.hotkey import HoldKey
-from voxprompt.paste import paste
-from voxprompt.recorder import Microphone
-from voxprompt.rewrite import Rewriter
+from quoth.asr import QwenTranscriber
+from quoth.dictation import Dictation, State
+from quoth.hotkey import HoldKey
+from quoth.paste import paste
+from quoth.recorder import Microphone
+from quoth.rewrite import Rewriter
 
 ICONS = {
     State.LOADING: "⏳",
@@ -27,7 +27,7 @@ ICONS = {
 
 class MenuBar(rumps.App):
     def __init__(self, dictation: Dictation, hold_key: HoldKey):
-        super().__init__("voxprompt", title=ICONS[State.LOADING], quit_button=None)
+        super().__init__("quoth", title=ICONS[State.LOADING], quit_button=None)
         self.dictation = dictation
         self.hold_key = hold_key
         self.status = rumps.MenuItem(State.LOADING.value)

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from voxprompt.recorder import Microphone, is_silent, write_wav
+from quoth.recorder import Microphone, is_silent, write_wav
 
 EVALS = Path(__file__).parent
 NO_SOUND = """No sound from the microphone: every sample is exactly zero.

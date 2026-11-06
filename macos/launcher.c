@@ -1,4 +1,4 @@
-// Runs voxprompt inside this binary. macOS grants Microphone and Accessibility to the
+// Runs quoth inside this binary. macOS grants Microphone and Accessibility to the
 // binary that makes the call, so a script that starts Python would ask as Python.
 
 #include <Python.h>
@@ -7,12 +7,12 @@
 #include <unistd.h>
 
 #ifndef MODULE
-#define MODULE L"voxprompt.app"
+#define MODULE L"quoth.app"
 #endif
 
 static void log_to_file(void) {
     char path[1024];
-    snprintf(path, sizeof path, "%s/Library/Logs/VoxPrompt.log", getenv("HOME"));
+    snprintf(path, sizeof path, "%s/Library/Logs/Quoth.log", getenv("HOME"));
     freopen(path, "a", stdout);
     freopen(path, "a", stderr);
 }

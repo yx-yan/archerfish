@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 824 824" role="img" aria-label="A voice waveform that ends in a text cursor">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B2D42"/>
+      <stop offset="1" stop-color="#14151F"/>
+    </linearGradient>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#tile)"/>
+  <g fill="#F4F1EA">
+    <rect x="242" y="427" width="68" height="170" rx="34"/>
+    <rect x="360" y="337" width="68" height="350" rx="34"/>
+    <rect x="478" y="262" width="68" height="500" rx="34"/>
+    <rect x="596" y="377" width="68" height="270" rx="34"/>
+  </g>
+  <rect x="714" y="222" width="68" height="580" rx="34" fill="#FFB020"/>
+</svg>

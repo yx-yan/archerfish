@@ -1,6 +1,6 @@
 import numpy as np
 
-from voxprompt.recorder import is_silent
+from quoth.recorder import is_silent
 
 
 def test_all_zero_audio_is_silent():

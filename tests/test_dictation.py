@@ -1,10 +1,10 @@
 import numpy as np
 import pytest
 
-from voxprompt.asr import Transcript
-from voxprompt.dictation import Dictation, State
-from voxprompt.recorder import SAMPLE_RATE
-from voxprompt.rewrite import Rewrite
+from quoth.asr import Transcript
+from quoth.dictation import Dictation, State
+from quoth.recorder import SAMPLE_RATE
+from quoth.rewrite import Rewrite
 
 SPEECH = np.ones((SAMPLE_RATE, 1), dtype=np.int16)
 

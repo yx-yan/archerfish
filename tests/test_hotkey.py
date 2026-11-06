@@ -1,4 +1,4 @@
-from voxprompt.hotkey import HoldKey
+from quoth.hotkey import HoldKey
 
 
 def make_key():
