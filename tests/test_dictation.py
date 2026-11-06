@@ -92,9 +92,9 @@ def test_press_is_ignored_while_loading():
 
 @pytest.mark.parametrize("kwargs, expected", [
     ({"mic": FakeMic(np.zeros((SAMPLE_RATE, 1), dtype=np.int16))}, "No sound"),
-    ({"text": ""}, "Heard nothing"),
-    ({"pasted": False}, "Accessibility"),
-    ({"fell_back": True}, "Rewrite failed"),
+    ({"text": ""}, "catch that"),
+    ({"pasted": False}, "clipboard"),
+    ({"fell_back": True}, "Cleanup failed"),
 ])
 def test_problems_are_reported(kwargs, expected):
     dictation, _ = make(**kwargs)

@@ -30,3 +30,9 @@ def test_falls_back_on_timeout():
 def test_falls_back_on_empty_reply():
     result = Rewriter(client_returning("")).rewrite("raw text")
     assert (result.text, result.fell_back) == ("raw text", True)
+
+
+def test_starts_without_an_api_key(monkeypatch):
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    assert Rewriter().client.api_key == "missing"

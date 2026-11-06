@@ -17,10 +17,10 @@ MIN_SECONDS = 0.3  # Shorter presses are accidents, such as typing an Option sho
 
 
 class State(Enum):
-    LOADING = "Loading model"
-    READY = "Ready"
-    RECORDING = "Recording"
-    WORKING = "Working"
+    LOADING = "Loading speech model…"
+    READY = "Ready. Hold right Option to talk"
+    RECORDING = "Listening…"
+    WORKING = "Cleaning up…"
 
 
 class Dictation:
@@ -69,19 +69,19 @@ class Dictation:
             self.message = self.process(samples)
         except Exception as error:
             print(f"Dictation failed: {error!r}", file=sys.stderr)
-            self.message = "Something went wrong; see the log"
+            self.message = "Something went wrong. See ~/Library/Logs/Quoth.log"
         self.state = State.READY
 
     def process(self, samples: np.ndarray) -> str:
         if is_silent(samples):
-            return "No sound: check microphone access"
+            return "No sound from the microphone. Check Setup"
         transcript = self.transcribe(samples)
         if not transcript:
-            return "Heard nothing"
+            return "Didn't catch that. Try again"
         rewrite = self.rewriter.rewrite(transcript)
         if not self.paste(rewrite.text):
-            return "Text is on the clipboard: Accessibility access is off"
-        return "Rewrite failed, pasted raw text" if rewrite.fell_back else ""
+            return "Couldn't paste, so the text is on your clipboard. Check Setup"
+        return "Cleanup failed, so your exact words were pasted" if rewrite.fell_back else ""
 
     def transcribe(self, samples: np.ndarray) -> str:
         with tempfile.TemporaryDirectory() as directory:
