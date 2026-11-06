@@ -9,7 +9,8 @@ is never sent automatically: a misheard word should not become an instruction.
 
 Everything after the key is released is waiting time, so this number decides
 whether the tool beats typing. Initial target: median under 2 seconds for 30
-seconds of speech. M0 measures whether that holds.
+seconds of speech. Over the 20 benchmark clips (3.6 to 30 seconds), speech
+recognition plus rewrite took a median of 1.25 s and at most 1.57 s, without pasting.
 
 ## Speech model
 
@@ -67,7 +68,7 @@ Accessibility access the text simply stays on the clipboard.
 
 macOS grants Microphone and Accessibility to the binary that makes the call, so a
 script that execs or spawns Python would ask as Python. `macos/launcher.c` embeds
-Python and runs `voxprompt.app` in its own process instead, and it uses the checkout's
+Python and runs `quoth.app` in its own process instead, and it uses the checkout's
 `.venv`. The bundle is ad-hoc signed, so permissions follow its hash: Python changes
 keep them, but changes to the launcher, `Info.plist` or icon may not.
 

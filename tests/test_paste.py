@@ -1,8 +1,8 @@
 import pytest
 from AppKit import NSPasteboard, NSPasteboardTypeString
 
-from voxprompt import paste as paste_module
-from voxprompt.paste import paste
+from quoth import paste as paste_module
+from quoth.paste import paste
 
 
 @pytest.fixture

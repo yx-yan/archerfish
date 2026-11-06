@@ -9,9 +9,9 @@ from pathlib import Path
 
 import numpy as np
 
-from voxprompt.asr import Transcriber
-from voxprompt.recorder import SAMPLE_RATE, is_silent, write_wav
-from voxprompt.rewrite import Rewriter
+from quoth.asr import Transcriber
+from quoth.recorder import SAMPLE_RATE, is_silent, write_wav
+from quoth.rewrite import Rewriter
 
 MIN_SECONDS = 0.3  # Shorter presses are accidents, such as typing an Option shortcut.
 

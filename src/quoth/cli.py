@@ -8,8 +8,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from voxprompt.asr import QwenTranscriber, Transcriber
-from voxprompt.rewrite import Rewriter
+from quoth.asr import QwenTranscriber, Transcriber
+from quoth.rewrite import Rewriter
 
 
 @dataclass

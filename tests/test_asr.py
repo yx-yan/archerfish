@@ -3,7 +3,7 @@ import wave
 import numpy as np
 import pytest
 
-from voxprompt.asr import read_wav
+from quoth.asr import read_wav
 
 
 def write_wav(path, rate, samples):
