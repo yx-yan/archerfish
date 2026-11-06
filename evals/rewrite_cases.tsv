@@ -1,0 +1,8 @@
+zh-question	嗯那个这个报错是什么原因啊
+zh-correction	帮我把这个按钮改成红色的，啊不对，改成蓝色的，然后那个，字体也稍微大一点
+zh-steps	就是我想做三件事吧，第一个是把登录页面修一下，然后第二个是把那个测试补上，嗯还有第三个就是更新一下 README
+zh-long	呃我现在这个项目啊它那个接口特别慢，就是用户一打开页面要等好几秒，我感觉可能是数据库的问题，也可能不是，你先帮我看一下，先别改代码，就是看完告诉我原因，然后我们再决定怎么改，对，先别改
+en-question	um so like what does this function actually do
+en-correction	can you rename this to user id, no wait, account id, and uh update the callers too
+en-steps	okay so three things, first fix the login page, second add the missing test, and then third update the readme I guess
+en-long	so basically the endpoint is really slow, like it takes a few seconds when users open the page, and I think it might be the database but I'm not sure, so can you take a look first, don't change any code yet, just tell me why and then we'll decide what to do

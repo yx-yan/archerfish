@@ -1,0 +1,20 @@
+zh-01	帮我看一下这个报错是什么原因。
+zh-02	把这个函数改成异步的，然后补上单元测试。
+zh-03	先不要改代码，你读一下这个模块，告诉我数据是怎么流动的。
+zh-04	这个接口现在太慢了，帮我找一下瓶颈在哪里，优先看数据库查询。
+zh-05	我想给网站加一个深色模式，颜色用现有的设计变量，不要引入新的依赖。
+zh-06	部署之后页面一直报五百错误，本地是好的，你帮我对比一下环境变量和构建日志。
+zh-07	帮我写一个脚本，每天早上把昨天的日志压缩一下，上传到对象存储，保留三十天。
+zh-08	这个方案我不太满意，主要是状态放得太散了。你重新想一下，把状态集中到一个地方，然后告诉我要改哪些文件。
+zh-09	我们现在要做一个语音输入工具。用户按住快捷键说话，松开之后先在本地识别，再让大模型整理成提示词，最后粘贴到光标的位置。你先帮我把模块划分出来，每个模块说明一下职责。
+zh-10	刚才那个测试还是失败了，我看错误信息好像是超时，但是单独跑又能通过，所以我怀疑是测试之间共享了状态。你帮我查一下有没有全局变量或者没有清理的连接，找到原因以后先告诉我，不要直接改。
+en-01	Can you explain why this test is failing?
+en-02	Rename this function and update everything that calls it.
+en-03	Don't change anything yet, just read this module and tell me how the data flows.
+en-04	This endpoint has become really slow, so please find the bottleneck and start with the database queries.
+en-05	Add a dark mode to the website, reuse the existing design tokens, and don't add any new dependencies.
+en-06	The page returns a five hundred error after deployment but works locally, so compare the environment variables and the build logs.
+en-07	Write a script that compresses yesterday's logs every morning, uploads them to object storage, and keeps them for thirty days.
+en-08	I'm not happy with this approach because the state is spread across too many places. Please rethink it, keep the state in one place, and list the files you would change.
+en-09	We're building a voice input tool. The user holds a hotkey and speaks, the audio is transcribed locally, a language model turns it into a clean prompt, and the result is pasted at the cursor. Start by splitting this into modules and describing what each one does.
+en-10	That test is still failing. The error looks like a timeout, but it passes when I run it alone, so I suspect the tests are sharing state. Please check for global variables or connections that never get closed, and tell me what you find before you change anything.
