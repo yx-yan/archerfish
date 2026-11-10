@@ -62,7 +62,7 @@ Times cover speech recognition and the rewrite, measured from a saved recording,
 
 ## Quick start
 
-You need an Apple Silicon Mac, Python 3.12, the Xcode Command Line Tools and a DeepSeek API key.
+You need an Apple Silicon Mac, Python 3.12, the Xcode Command Line Tools and a DeepSeek API key. Archerfish holds about 1 GB of memory while it runs, mostly the speech model, so that it can start the moment you press the key. On an 8 GB Mac that is a real share of the memory.
 
 ```bash
 python3.12 -m venv .venv
