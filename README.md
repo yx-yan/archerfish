@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.svg" width="128" alt="Archerfish logo: the Yan Yu Xian fish, with sound waves leaving its mouth">
+  <img src="assets/logo.svg" width="128" alt="Archerfish logo: an archerfish under water whose jet of water becomes a voice waveform ending in a text cursor">
 </p>
 
 <h1 align="center">Archerfish</h1>
