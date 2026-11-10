@@ -48,7 +48,7 @@ flowchart LR
 
 ## Why "Archerfish"
 
-An archerfish hunts from below the water. It spots an insect on a leaf above the surface and knocks it down with one precise jet of water from its mouth, even correcting for the way water bends light. Archerfish does the same with your voice: you say it however it comes out, and one clean, well-aimed prompt lands at your cursor. Its sibling Earfish listens for you; this one speaks for you. The fish in the logo is the 盐鱼鲜 (Yan Yu Xian) fish from its author's personal brand.
+An archerfish hunts from below the water. It spots an insect on a leaf above the surface and knocks it down with one precise jet of water from its mouth, even correcting for the way water bends light. Archerfish does the same with your voice: you say it however it comes out, and one clean, well-aimed prompt lands at your cursor. Its sibling [Earfish](https://github.com/yx-yan/earfish) listens for you; this one speaks for you. The fish in the logo is the 盐鱼鲜 (Yan Yu Xian) fish from its author's personal brand.
 
 ## Performance
 
