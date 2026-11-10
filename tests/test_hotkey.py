@@ -1,4 +1,4 @@
-from quoth.hotkey import HoldKey
+from archerfish.hotkey import HoldKey
 
 
 def make_key():

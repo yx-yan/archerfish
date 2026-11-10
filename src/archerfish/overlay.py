@@ -22,7 +22,7 @@ from AppKit import (
     NSWindowStyleMaskNonactivatingPanel,
 )
 
-from quoth.dictation import State
+from archerfish.dictation import State
 
 WIDTH, HEIGHT = 92, 40
 BOTTOM_MARGIN = 48

@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/logo.svg" width="128" alt="Quoth logo: the Yan Yu Xian fish, with sound waves leaving its mouth">
+  <img src="assets/logo.svg" width="128" alt="Archerfish logo: the Yan Yu Xian fish, with sound waves leaving its mouth">
 </p>
 
-<h1 align="center">Quoth</h1>
+<h1 align="center">Archerfish</h1>
 
 <p align="center">
   <strong>Say it messy. Send it clean.</strong><br>
@@ -46,6 +46,10 @@ flowchart LR
 - **Nothing sends itself.** A misheard word should not become an instruction, so you press Enter.
 - **You keep what you said.** If the rewrite fails or takes over 5 seconds, you get the raw transcript.
 
+## Why "Archerfish"
+
+An archerfish hunts from below the water. It spots an insect on a leaf above the surface and knocks it down with one precise jet of water from its mouth, even correcting for the way water bends light. Archerfish does the same with your voice: you say it however it comes out, and one clean, well-aimed prompt lands at your cursor. Its sibling Earfish listens for you; this one speaks for you. The fish in the logo is the 盐鱼鲜 (Yan Yu Xian) fish from its author's personal brand.
+
 ## Performance
 
 Measured on an M5 with 16 GB, using 20 read-aloud clips (10 Chinese, 10 English, 3.6 to 30 seconds) from one speaker.
@@ -65,26 +69,26 @@ python3.12 -m venv .venv
 .venv/bin/pip install -e ".[dev,bench]"
 cp .env.example .env   # then add your DeepSeek key
 macos/build.sh
-open /Applications/Quoth.app
+open /Applications/Archerfish.app
 ```
 
-This builds a small native launcher and installs `Quoth.app`, which you can then open from Spotlight. To start it at login, add it under System Settings > General > Login Items. If the checkout is in Documents, allow that access when asked. A setup window then shows what is left to turn on, and you can reopen it from the menu bar.
+This builds a small native launcher and installs `Archerfish.app`, which you can then open from Spotlight. To start it at login, add it under System Settings > General > Login Items. If the checkout is in Documents, allow that access when asked. A setup window then shows what is left to turn on, and you can reopen it from the menu bar.
 
 The first launch downloads the speech model, so the menu bar waveform stays dim until that finishes.
 
-When the menu bar waveform turns solid, click into any text box, hold the right Option key, speak, and let go. A small pill at the bottom of the screen shows that it is listening. Press Enter yourself to send. Errors go to `~/Library/Logs/Quoth.log`.
+When the menu bar waveform turns solid, click into any text box, hold the right Option key, speak, and let go. A small pill at the bottom of the screen shows that it is listening. Press Enter yourself to send. Errors go to `~/Library/Logs/Archerfish.log`.
 
 ## Good to know
 
 - The app runs Python from this checkout, so code changes only need a restart. Moving the checkout or changing anything in `macos/` may mean granting the permissions again.
 - The microphone stays open while the app runs, so macOS shows its recording indicator the whole time. Audio is only kept while the key is held.
 - Restart the app after changing the input device.
-- To run without the app, use `.venv/bin/quoth-app` from Terminal.app and grant the same permissions to Terminal.
+- To run without the app, use `.venv/bin/archerfish-app` from Terminal.app and grant the same permissions to Terminal.
 
 ## Clean up a recording
 
 ```bash
-.venv/bin/quoth recording.wav
+.venv/bin/archerfish recording.wav
 ```
 
 The prompt goes to stdout and timings go to stderr. Input must be 16 kHz mono WAV.

@@ -1,8 +1,8 @@
 import pytest
 from AppKit import NSPasteboard, NSPasteboardTypeString
 
-from quoth import paste as paste_module
-from quoth.paste import paste
+from archerfish import paste as paste_module
+from archerfish.paste import paste
 
 
 @pytest.fixture

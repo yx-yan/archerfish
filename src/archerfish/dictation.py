@@ -9,9 +9,9 @@ from pathlib import Path
 
 import numpy as np
 
-from quoth.asr import Transcriber
-from quoth.recorder import SAMPLE_RATE, is_silent, write_wav
-from quoth.rewrite import Rewriter
+from archerfish.asr import Transcriber
+from archerfish.recorder import SAMPLE_RATE, is_silent, write_wav
+from archerfish.rewrite import Rewriter
 
 MIN_SECONDS = 0.3  # Shorter presses are accidents, such as typing an Option shortcut.
 
@@ -69,7 +69,7 @@ class Dictation:
             self.message = self.process(samples)
         except Exception as error:
             print(f"Dictation failed: {error!r}", file=sys.stderr)
-            self.message = "Something went wrong. See ~/Library/Logs/Quoth.log"
+            self.message = "Something went wrong. See ~/Library/Logs/Archerfish.log"
         self.state = State.READY
 
     def process(self, samples: np.ndarray) -> str:

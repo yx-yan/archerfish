@@ -16,7 +16,7 @@ from pathlib import Path
 import mlx.core as mx
 
 from metrics import error_rate
-from quoth.asr import BACKENDS
+from archerfish.asr import BACKENDS
 
 EVALS = Path(__file__).parent
 

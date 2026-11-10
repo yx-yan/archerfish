@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 
 from openai import APITimeoutError
 
-from quoth.rewrite import Rewriter
+from archerfish.rewrite import Rewriter
 
 
 def client_returning(content):

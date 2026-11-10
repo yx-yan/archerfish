@@ -1,4 +1,4 @@
-from quoth.onboarding import Check, has_key, incomplete
+from archerfish.onboarding import Check, has_key, incomplete
 
 
 def check(done):

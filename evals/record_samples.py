@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from quoth.recorder import Microphone, is_silent, write_wav
+from archerfish.recorder import Microphone, is_silent, write_wav
 
 EVALS = Path(__file__).parent
 NO_SOUND = """No sound from the microphone: every sample is exactly zero.
