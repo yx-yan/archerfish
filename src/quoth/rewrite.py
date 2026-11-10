@@ -18,7 +18,8 @@ class Rewrite:
 class Rewriter:
     def __init__(self, client: OpenAI | None = None, model: str = "deepseek-flash", timeout: float = 5):
         self.client = client or OpenAI(
-            api_key=os.environ.get("DEEPSEEK_API_KEY"),
+            # A missing key fails on the first call, which falls back to the raw transcript.
+            api_key=os.environ.get("DEEPSEEK_API_KEY") or "missing",
             base_url="https://api.deepseek.com",
             max_retries=0,
         )
