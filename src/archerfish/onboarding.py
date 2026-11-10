@@ -54,7 +54,7 @@ class Check:
 
 CHECKS = (
     Check("Microphone", "Hears you while the key is held.", has_microphone, "Microphone"),
-    Check("Input Monitoring", "Notices the right Option key. Reopen Quoth after allowing it.",
+    Check("Input Monitoring", "Notices the right Option key. Reopen Archerfish after allowing it.",
           CGPreflightListenEventAccess, "ListenEvent"),
     Check("Accessibility", "Pastes the prompt at your cursor.", AXIsProcessTrusted, "Accessibility"),
     Check("DeepSeek API key", "Goes in .env. Without it, you get the raw transcript.",
@@ -97,7 +97,7 @@ class SetupWindow:
             NSBackingStoreBuffered,
             False,
         )
-        self.window.setTitle_("Quoth Setup")
+        self.window.setTitle_("Archerfish Setup")
         self.window.setReleasedWhenClosed_(False)
         content = self.window.contentView()
 
@@ -105,7 +105,7 @@ class SetupWindow:
         icon.setImage_(NSApplication.sharedApplication().applicationIconImage())
         content.addSubview_(icon)
         content.addSubview_(label(
-            "Set up Quoth", NSMakeRect(MARGIN + 66, height - 46, 320, 26), NSFont.boldSystemFontOfSize_(20)
+            "Set up Archerfish", NSMakeRect(MARGIN + 66, height - 46, 320, 26), NSFont.boldSystemFontOfSize_(20)
         ))
         self.summary = label(
             "", NSMakeRect(MARGIN + 66, height - 68, 340, 18), NSFont.systemFontOfSize_(13),

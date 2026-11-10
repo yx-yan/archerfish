@@ -1,8 +1,8 @@
 from pathlib import Path
 
-import quoth
-from quoth.dictation import State
-from quoth.overlay import MIN_BAR, SHOW_DELAY, Animation
+import archerfish
+from archerfish.dictation import State
+from archerfish.overlay import MIN_BAR, SHOW_DELAY, Animation
 
 FRAME = 1 / 30
 
@@ -64,6 +64,6 @@ def test_bars_never_vanish():
 
 
 def test_every_state_has_a_menu_bar_icon():
-    icons = Path(quoth.__file__).parent / "icons"
+    icons = Path(archerfish.__file__).parent / "icons"
     names = [state.name.lower() for state in State] + ["warning"]
     assert all((icons / f"{name}.png").exists() for name in names)

@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
-    <string>Quoth</string>
+    <string>Archerfish</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
     <key>CFBundleIdentifier</key>
-    <string>com.yuxuanyan.quoth</string>
+    <string>com.yuxuanyan.archerfish</string>
     <key>CFBundleName</key>
-    <string>Quoth</string>
+    <string>Archerfish</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
@@ -17,8 +17,8 @@
     <key>LSUIElement</key>
     <true/>
     <key>NSDocumentsFolderUsageDescription</key>
-    <string>Quoth runs from its project folder inside Documents.</string>
+    <string>Archerfish runs from its project folder inside Documents.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Quoth listens while you hold the right Option key.</string>
+    <string>Archerfish listens while you hold the right Option key.</string>
 </dict>
 </plist>

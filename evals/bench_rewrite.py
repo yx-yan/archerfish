@@ -7,7 +7,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from quoth.rewrite import Rewriter
+from archerfish.rewrite import Rewriter
 
 EVALS = Path(__file__).parent
 

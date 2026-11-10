@@ -1,6 +1,6 @@
 import numpy as np
 
-from quoth.recorder import loudness, is_silent
+from archerfish.recorder import loudness, is_silent
 
 
 def test_all_zero_audio_is_silent():

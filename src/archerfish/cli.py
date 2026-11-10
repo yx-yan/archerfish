@@ -8,8 +8,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from quoth.asr import QwenTranscriber, Transcriber
-from quoth.rewrite import Rewriter
+from archerfish.asr import QwenTranscriber, Transcriber
+from archerfish.rewrite import Rewriter
 
 
 @dataclass

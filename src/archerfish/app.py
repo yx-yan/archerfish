@@ -11,14 +11,14 @@ from ApplicationServices import AXIsProcessTrustedWithOptions
 from dotenv import load_dotenv
 from Quartz import CGRequestListenEventAccess
 
-from quoth.asr import QwenTranscriber
-from quoth.dictation import Dictation, State
-from quoth.hotkey import HoldKey
-from quoth.onboarding import SetupWindow, incomplete
-from quoth.overlay import Overlay
-from quoth.paste import paste
-from quoth.recorder import Microphone
-from quoth.rewrite import Rewriter
+from archerfish.asr import QwenTranscriber
+from archerfish.dictation import Dictation, State
+from archerfish.hotkey import HoldKey
+from archerfish.onboarding import SetupWindow, incomplete
+from archerfish.overlay import Overlay
+from archerfish.paste import paste
+from archerfish.recorder import Microphone
+from archerfish.rewrite import Rewriter
 
 ICON_DIR = Path(__file__).parent / "icons"
 ICONS = {state: str(ICON_DIR / f"{state.name.lower()}.png") for state in State}
@@ -27,7 +27,7 @@ WARNING_ICON = str(ICON_DIR / "warning.png")
 
 class MenuBar(rumps.App):
     def __init__(self, dictation: Dictation, hold_key: HoldKey):
-        super().__init__("quoth", icon=ICONS[State.LOADING], template=True, quit_button=None)
+        super().__init__("archerfish", icon=ICONS[State.LOADING], template=True, quit_button=None)
         self.dictation = dictation
         self.hold_key = hold_key
         self.overlay = Overlay(dictation)
@@ -38,7 +38,7 @@ class MenuBar(rumps.App):
             self.status,
             rumps.separator,
             rumps.MenuItem("Setup...", callback=lambda _: self.setup.show()),
-            rumps.MenuItem("Quit Quoth", callback=lambda _: quit_now()),
+            rumps.MenuItem("Quit Archerfish", callback=lambda _: quit_now()),
         ]
 
     @rumps.timer(0.1)
@@ -64,7 +64,7 @@ class MenuBar(rumps.App):
             self.hold_key.start()
             self.dictation.message = ""
         except PermissionError:
-            self.dictation.message = "Allow Input Monitoring in Setup, then reopen Quoth"
+            self.dictation.message = "Allow Input Monitoring in Setup, then reopen Archerfish"
 
 
 def quit_now(*_) -> None:

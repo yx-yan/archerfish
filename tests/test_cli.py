@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from quoth.asr import Transcript
-from quoth.cli import process
-from quoth.rewrite import Rewrite
+from archerfish.asr import Transcript
+from archerfish.cli import process
+from archerfish.rewrite import Rewrite
 
 
 class FakeTranscriber:

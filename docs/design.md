@@ -83,7 +83,7 @@ Accessibility access the text simply stays on the clipboard.
 
 macOS grants Microphone and Accessibility to the binary that makes the call, so a
 script that execs or spawns Python would ask as Python. `macos/launcher.c` embeds
-Python and runs `quoth.app` in its own process instead, and it uses the checkout's
+Python and runs `archerfish.app` in its own process instead, and it uses the checkout's
 `.venv`. The bundle is ad-hoc signed, so permissions follow its hash: Python changes
 keep them, but changes to the launcher, `Info.plist` or icon may not.
 

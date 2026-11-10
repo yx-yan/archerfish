@@ -1,10 +1,10 @@
 import numpy as np
 import pytest
 
-from quoth.asr import Transcript
-from quoth.dictation import Dictation, State
-from quoth.recorder import SAMPLE_RATE
-from quoth.rewrite import Rewrite
+from archerfish.asr import Transcript
+from archerfish.dictation import Dictation, State
+from archerfish.recorder import SAMPLE_RATE
+from archerfish.rewrite import Rewrite
 
 SPEECH = np.ones((SAMPLE_RATE, 1), dtype=np.int16)
 

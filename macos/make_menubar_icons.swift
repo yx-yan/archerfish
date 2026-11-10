@@ -1,5 +1,5 @@
 // Draw the menu bar template icons: the logo's waveform, one variant per state.
-// Usage: swift macos/make_menubar_icons.swift src/quoth/icons
+// Usage: swift macos/make_menubar_icons.swift src/archerfish/icons
 
 import AppKit
 
