@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.svg" width="128" alt="Quoth logo: a voice waveform that ends in a text cursor">
+  <img src="assets/logo.svg" width="128" alt="Quoth logo: the Yan Yu Xian fish, with sound waves leaving its mouth">
 </p>
 
 <h1 align="center">Quoth</h1>
@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/macOS-Apple%20Silicon-14151F" alt="macOS on Apple Silicon">
-  <img src="https://img.shields.io/badge/Python-3.12-14151F" alt="Python 3.12">
+  <img src="https://img.shields.io/badge/macOS-Apple%20Silicon-14213D" alt="macOS on Apple Silicon">
+  <img src="https://img.shields.io/badge/Python-3.12-14213D" alt="Python 3.12">
   <img src="https://img.shields.io/badge/status-early-FFB020" alt="Status: early">
 </p>
 
