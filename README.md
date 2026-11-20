@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Say it messy. Send it clean.</strong><br>
-  Hold a key, speak Chinese or English, and a clean prompt lands at your cursor.
+  Hold a key and think out loud. A clear prompt lands at your cursor, ready for your AI assistant.
 </p>
 
 <p align="center">
@@ -16,17 +16,33 @@
 </p>
 
 <p align="center">
-  <img src="assets/banner.svg" alt="You say: can you rename this to user id, no wait, account id, and uh update the callers too. Your cursor gets: Rename this to account id and update the callers too.">
+  <img src="assets/banner.svg" alt="You say: so basically what I want is, hmm, the retry logic in the client, right now it retries forever which is bad, so like cap it at, I don't know, three times, no make it five, with exponential backoff, and uh, only retry on 5xx and timeouts, not on 4xx because those won't fix themselves, and log each retry, oh and keep the existing tests passing. Your cursor gets: Change the retry logic in the client: cap retries at five instead of retrying forever, with exponential backoff. Only retry on 5xx and timeouts, not on 4xx because those won't fix themselves. Log each retry, and keep the existing tests passing.">
 </p>
 
-Chinese and English both work, and long requests keep their constraints:
+<p align="center"><sub>Real output from the rewrite step. The input is the <code>en-ramble</code> case in <a href="evals/rewrite_cases.tsv">the test cases</a>.</sub></p>
 
-| You say | Your cursor gets |
-|---|---|
-| okay so three things, first fix the login page, second add the missing test, and then third update the readme I guess | Fix the login page, add the missing test, and update the readme. |
-| 呃我现在这个项目啊它那个接口特别慢，就是用户一打开页面要等好几秒，我感觉可能是数据库的问题，也可能不是，你先帮我看一下，先别改代码，就是看完告诉我原因，然后我们再决定怎么改，对，先别改 | 我现在这个项目接口特别慢，用户一打开页面要等好几秒。我感觉可能是数据库的问题，也可能不是。你先帮我看一下，先别改代码，看完告诉我原因，然后我们再决定怎么改。对，先别改。 |
+Talking is faster than typing, but a raw transcript of how people talk makes a poor prompt. Archerfish keeps what you asked for and drops the rest:
 
-<sub>Real output from the rewrite step, using inputs from <a href="evals/rewrite_cases.tsv">the test cases</a>.</sub>
+- **Changed your mind halfway?** Only the final version stays.
+- **Constraints buried in the rambling?** Every one of them comes through, and nothing is added.
+- **Chinese, English, or both in one sentence?** Speak however you think; technical terms stay as you said them.
+- **About 1.3 seconds** from letting go of the key to clean text.
+- **Audio never leaves your Mac.** Speech recognition runs locally; only the text goes to DeepSeek.
+- **Nothing sends itself.** You read it, then press Enter. If the cleanup fails, you get your raw words, never nothing.
+
+## Quick start
+
+You need an Apple Silicon Mac, Python 3.12, the Xcode Command Line Tools and a DeepSeek API key.
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/pip install -e ".[dev,bench]"
+cp .env.example .env   # then add your DeepSeek key
+macos/build.sh
+open /Applications/Archerfish.app
+```
+
+A setup window shows which permissions are left to turn on. The first launch downloads the speech model; when the menu bar waveform turns solid, click into any text box, **hold the right Option key, speak, and let go**.
 
 ## How it works
 
@@ -41,14 +57,7 @@ flowchart LR
     D --> E["You check it<br>and press Enter"]
 ```
 
-- **Your meaning stays intact.** Fillers and false starts go, and self-corrections keep only the final version. The rewrite is told to keep every request and constraint, and to add nothing.
-- **Audio stays on your Mac.** Speech recognition runs locally. Only the transcript goes to DeepSeek.
-- **Nothing sends itself.** A misheard word should not become an instruction, so you press Enter.
-- **You keep what you said.** If the rewrite fails or takes over 5 seconds, you get the raw transcript.
-
-## Why "Archerfish"
-
-An archerfish hunts from below the water. It spots an insect on a leaf above the surface and knocks it down with one precise jet of water from its mouth, even correcting for the way water bends light. Archerfish does the same with your voice: you say it however it comes out, and one clean, well-aimed prompt lands at your cursor. Its sibling [Earfish](https://github.com/yx-yan/earfish) listens for you; this one speaks for you. The fish in the logo is the 盐鱼鲜 (Yan Yu Xian) fish from its author's personal brand.
+The cleanup prompt is in [`src/archerfish/prompts/rewrite.md`](src/archerfish/prompts/rewrite.md). It removes fillers, false starts and repetition, keeps every request and constraint, adds nothing, and never answers or carries out what you said. If the API fails or takes over 5 seconds, the raw transcript is pasted instead.
 
 ## Performance
 
@@ -60,32 +69,22 @@ Measured on an M5 with 16 GB, using 20 read-aloud clips (10 Chinese, 10 English,
 
 Times cover speech recognition and the rewrite, measured from a saved recording, so they leave out pasting. The sample is small. See [docs/design.md](docs/design.md) for the model comparison.
 
-## Quick start
+## Why "Archerfish"
 
-You need an Apple Silicon Mac, Python 3.12, the Xcode Command Line Tools and a DeepSeek API key. Archerfish holds about 1 GB of memory while it runs, mostly the speech model, so that it can start the moment you press the key. On an 8 GB Mac that is a real share of the memory.
-
-```bash
-python3.12 -m venv .venv
-.venv/bin/pip install -e ".[dev,bench]"
-cp .env.example .env   # then add your DeepSeek key
-macos/build.sh
-open /Applications/Archerfish.app
-```
-
-This builds a small native launcher and installs `Archerfish.app`, which you can then open from Spotlight. To start it at login, add it under System Settings > General > Login Items. If the checkout is in Documents, allow that access when asked. A setup window then shows what is left to turn on, and you can reopen it from the menu bar.
-
-The first launch downloads the speech model, so the menu bar waveform stays dim until that finishes.
-
-When the menu bar waveform turns solid, click into any text box, hold the right Option key, speak, and let go. A small pill at the bottom of the screen shows that it is listening. Press Enter yourself to send. Errors go to `~/Library/Logs/Archerfish.log`.
+An archerfish hunts from below the water. It spots an insect on a leaf above the surface and knocks it down with one precise jet of water from its mouth, even correcting for the way water bends light. Archerfish does the same with your voice: you say it however it comes out, and one clean, well-aimed prompt lands at your cursor. Its sibling [Earfish](https://github.com/yx-yan/earfish) listens for you; this one speaks for you. The fish in the logo is the 盐鱼鲜 (Yan Yu Xian) fish from its author's personal brand.
 
 ## Good to know
 
+- Archerfish holds about 1 GB of memory while it runs, mostly the speech model, so it can start the moment you press the key. On an 8 GB Mac that is a real share.
+- To start it at login, add it under System Settings > General > Login Items. If the checkout is in Documents, allow that access when asked.
 - The app runs Python from this checkout, so code changes only need a restart. Moving the checkout or changing anything in `macos/` may mean granting the permissions again.
 - The microphone stays open while the app runs, so macOS shows its recording indicator the whole time. Audio is only kept while the key is held.
 - Restart the app after changing the input device.
+- Errors go to `~/Library/Logs/Archerfish.log`.
 - To run without the app, use `.venv/bin/archerfish-app` from Terminal.app and grant the same permissions to Terminal.
 
-## Clean up a recording
+<details>
+<summary><strong>Clean up a recording from the command line</strong></summary>
 
 ```bash
 .venv/bin/archerfish recording.wav
@@ -93,7 +92,10 @@ When the menu bar waveform turns solid, click into any text box, hold the right 
 
 The prompt goes to stdout and timings go to stderr. Input must be 16 kHz mono WAV.
 
-## Benchmarks
+</details>
+
+<details>
+<summary><strong>Run the benchmarks</strong></summary>
 
 ```bash
 .venv/bin/python evals/record_samples.py        # read 20 scripts aloud
@@ -103,6 +105,8 @@ The prompt goes to stdout and timings go to stderr. Input must be 16 kHz mono WA
 ```
 
 Run the recorder from Terminal.app: macOS may give apps without microphone access silent audio. Recordings and results stay in `evals/samples/` and `evals/results/`, which git ignores.
+
+</details>
 
 ## License
 
