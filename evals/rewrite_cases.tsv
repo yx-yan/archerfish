@@ -6,3 +6,4 @@ en-question	um so like what does this function actually do
 en-correction	can you rename this to user id, no wait, account id, and uh update the callers too
 en-steps	okay so three things, first fix the login page, second add the missing test, and then third update the readme I guess
 en-long	so basically the endpoint is really slow, like it takes a few seconds when users open the page, and I think it might be the database but I'm not sure, so can you take a look first, don't change any code yet, just tell me why and then we'll decide what to do
+en-ramble	so basically what I want is, hmm, the retry logic in the client, right now it retries forever which is bad, so like cap it at, I don't know, three times, no make it five, with exponential backoff, and uh, only retry on 5xx and timeouts, not on 4xx because those won't fix themselves, and log each retry, oh and keep the existing tests passing

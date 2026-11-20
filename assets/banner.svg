@@ -1,20 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" role="img" aria-label="Spoken: can you rename this to user id, no wait, account id, and uh update the callers too. Pasted at the cursor: Rename this to account id and update the callers too.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 660" role="img" aria-label="Spoken: so basically what I want is, hmm, the retry logic in the client, right now it retries forever which is bad, so like cap it at, I don't know, three times, no make it five, with exponential backoff, and uh, only retry on 5xx and timeouts, not on 4xx because those won't fix themselves, and log each retry, oh and keep the existing tests passing. Pasted at the cursor: Change the retry logic in the client: cap retries at five instead of retrying forever, with exponential backoff. Only retry on 5xx and timeouts, not on 4xx because those won't fix themselves. Log each retry, and keep the existing tests passing.">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#22345C"/>
       <stop offset="1" stop-color="#14213D"/>
     </linearGradient>
   </defs>
-  <rect width="880" height="280" rx="24" fill="url(#bg)"/>
+  <rect width="880" height="660" rx="24" fill="url(#bg)"/>
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
-    <text x="48" y="62" font-size="14" font-weight="600" letter-spacing="1.5" fill="#8E9AB8">YOU SAY</text>
-    <g font-size="24" fill="#8E9AB8">
-      <text x="48" y="112">can you rename this to</text>
-      <text x="48" y="150"><tspan text-decoration="line-through">user id, no wait,</tspan> <tspan fill="#F4F1EA">account id,</tspan></text>
-      <text x="48" y="188">and <tspan text-decoration="line-through">uh</tspan> update the callers too</text>
+    <text x="48" y="60" font-size="14" font-weight="600" letter-spacing="1.5" fill="#8E9AB8">YOU SAY</text>
+    <g font-size="21" fill="#8E9AB8">
+      <text x="48" y="104"><tspan fill="#5E6B8A" text-decoration="line-through">so basically what I want is, hmm,</tspan> the retry logic in the client,</text>
+      <text x="48" y="138">right now it retries forever which is bad, <tspan fill="#5E6B8A" text-decoration="line-through">so like</tspan> cap it at,</text>
+      <text x="48" y="172"><tspan fill="#5E6B8A" text-decoration="line-through">I don't know, three times, no make it</tspan> <tspan fill="#FFB020">five</tspan>, with exponential</text>
+      <text x="48" y="206">backoff, <tspan fill="#5E6B8A" text-decoration="line-through">and uh,</tspan> only retry on 5xx and timeouts, not on 4xx</text>
+      <text x="48" y="240">because those won't fix themselves, and log each retry,</text>
+      <text x="48" y="274"><tspan fill="#5E6B8A" text-decoration="line-through">oh</tspan> and keep the existing tests passing</text>
     </g>
 
-    <g transform="translate(396 120)">
+    <line x1="48" y1="324" x2="378" y2="324" stroke="#33466E"/>
+    <line x1="502" y1="324" x2="832" y2="324" stroke="#33466E"/>
+    <g transform="translate(394 304)">
       <rect width="92" height="40" rx="20" fill="#14213D" stroke="#33466E"/>
       <g fill="#F4F1EA">
         <rect x="19.5" y="11" width="5" height="18" rx="2.5"/>
@@ -25,13 +30,16 @@
       <rect x="67.5" y="7" width="5" height="26" rx="2.5" fill="#FFB020"/>
     </g>
 
-    <text x="536" y="62" font-size="14" font-weight="600" letter-spacing="1.5" fill="#FFB020">YOUR CURSOR GETS</text>
-    <g font-size="24" font-weight="500" fill="#F4F1EA">
-      <text x="536" y="112">Rename this to account id</text>
-      <text x="536" y="150">and update the callers too.</text>
+    <text x="48" y="388" font-size="14" font-weight="600" letter-spacing="1.5" fill="#FFB020">YOUR CURSOR GETS</text>
+    <g font-size="23" font-weight="500" fill="#F4F1EA">
+      <text x="48" y="434">Change the retry logic in the client: cap retries at <tspan fill="#FFB020">five</tspan></text>
+      <text x="48" y="470">instead of retrying forever, with exponential backoff.</text>
+      <text x="48" y="506">Only retry on 5xx and timeouts, not on 4xx because those</text>
+      <text x="48" y="542">won't fix themselves. Log each retry, and keep the existing</text>
+      <text x="48" y="578">tests passing.</text>
     </g>
-    <rect x="536" y="166" width="3" height="28" rx="1.5" fill="#FFB020"/>
+    <rect x="48" y="592" width="3" height="26" rx="1.5" fill="#FFB020"/>
 
-    <text x="48" y="240" font-size="15" fill="#8E9AB8">Fillers and false starts go. Your meaning stays. You press Enter.</text>
+    <text x="832" y="612" font-size="15" fill="#8E9AB8" text-anchor="end">Detours and changed minds go. Every constraint stays. You press Enter.</text>
   </g>
 </svg>
